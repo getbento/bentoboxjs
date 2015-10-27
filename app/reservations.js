@@ -8,7 +8,7 @@ var Reservations = (function() {
 	};
 
 	reservations.handleOpentable = function(event) {
-		var reserveUrl = 'http://www.opentable.com/single.aspx?rid=' + options.opentable_id + '&amp;restref=' + options.opentable_id;
+		var reserveUrl = 'http://www.opentable.com/single.aspx?rid=' + options.opentable_id + '&restref=' + options.opentable_id;
 
 		if (Utils.isMobile()) {
 			window.location.href = reserveUrl;
