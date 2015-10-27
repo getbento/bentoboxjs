@@ -1,0 +1,6 @@
+{
+  "name": "bentoboxjs",
+  "dependencies": [
+    "webpack"
+  ]
+}
