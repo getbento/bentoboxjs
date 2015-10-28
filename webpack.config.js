@@ -6,13 +6,5 @@ module.exports = {
 	output: {
 		path: __dirname + "/dist",
 		filename: "bentobox.dist.js"
-	},
-	
-	plugins: [
-		new webpack.optimize.UglifyJsPlugin({
-		    compress: {
-		        warnings: false
-		    }
-		})
-	]
+	}
 }

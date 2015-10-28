@@ -1,1 +1,267 @@
-!function(e){function r(t){if(o[t])return o[t].exports;var n=o[t]={exports:{},id:t,loaded:!1};return e[t].call(n.exports,n,n.exports,r),n.loaded=!0,n.exports}var o={};return r.m=e,r.c=o,r.p="",r(0)}([function(e,r,o){var t=o(1),n=o(2),s=o(3),i=o(4),a={};a.Utils=s,a.Newsletter=t,a.Reservations=n,a.Forms=i,window.Bento=a,e.exports=a},function(e,r){var o=function(){var e={};return e.options={formSelector:"form#email_newsletter",successMessage:"div#success",errorMessage:"div#error"},e.handleFormSubmit=function(r){r.preventDefault(),$(e.options.errorMessage).hide();var o=$(this);$.ajax({type:"POST",url:o.attr("action"),data:o.serialize(),success:e.formSuccess,error:e.formError})},e.formSuccess=function(r){1!=r.success?e.formError():$(e.options.successMessage).fadeIn()},e.formError=function(r){$(e.options.errorMessage).fadeIn()},e.initialize=function(r){for(var o in r)e.options[o]=r[o];void 0!==e.options.formSelector&&$(e.options.formSelector).on("submit",e.handleFormSubmit)},e}();e.exports=o},function(e,r,o){var t=o(3),n=function(){var e={};return options={selector:"a.reserve"},e.handleOpentable=function(e){var r="http://www.opentable.com/single.aspx?rid="+options.opentable_id+"&restref="+options.opentable_id;if(t.isMobile())window.location.href=r;else{var o=$($("#opentable-modal-template").html());o.show(),o.find("iframe").attr("src",r),$("body").append(o),$.featherlight(o,{afterClose:function(){o.hide()}})}},e.handleReservation=function(r){switch(r.preventDefault(),options.provider){case"opentable":e.handleOpentable();default:return}},e.initialize=function(r){for(var o in r)options[o]=r[o];$(options.selector).on("click",e.handleReservation)},e}();e.exports=n},function(e,r){var o=function(){var e={};return e.isMobile=function(){return window.matchMedia("(max-width: 800px)").matches},e}();e.exports=o},function(e,r,o){var t=(o(3),function(){var e={};return options={formSelector:"form",success:"div.success",error:"div.error",successCallback:e.successCallback,errorCallback:e.errorCallback},e.handleSubmit=function(r){r.preventDefault();var o=$(this),t=o.serialize();e.currentForm=o,e.hideMessages(),$.ajax({type:"POST",url:o.attr("action"),data:t,success:e.formSubmitSuccess,error:e.formSubmitError})},e.successCallback=function(){},e.errorCallback=function(){},e.hideMessages=function(){$(options.success).hide(),$(options.error).hide()},e.formSubmitSuccess=function(r){1==r.success||"true"==r.success?($(options.success).fadeIn(),options.successCallback(),e.currentForm.trigger("reset")):(e.currentForm.find(options.error).fadeIn(),options.errorCallback())},e.formSubmitError=function(){$(options.error).fadeIn()},e.initialize=function(r){for(var o in r)options[o]=r[o];$(options.formSelector).on("submit",e.handleSubmit)},e}());e.exports=t}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Newsletter = __webpack_require__(1);
+	var Reservations = __webpack_require__(2);
+	var Utils = __webpack_require__(3);
+	var Forms = __webpack_require__(4);
+
+	var Bento = {};
+
+	Bento.Utils = Utils;
+	Bento.Newsletter = Newsletter;
+	Bento.Reservations = Reservations;
+	Bento.Forms = Forms;
+
+	window.Bento = Bento;
+
+	module.exports = Bento;
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	var Newsletter = (function() {
+		var newsletter = {};
+
+		newsletter.options = {
+			formSelector: 'form#email_newsletter',
+			successMessage: 'div#success',
+			errorMessage: 'div#error',
+		};
+
+		newsletter.handleFormSubmit = function(event) {
+			event.preventDefault();
+
+			$(newsletter.options.errorMessage).hide();
+
+			var form = $(this);
+			$.ajax({
+				type: 'POST',
+				url: form.attr('action'),
+				data: form.serialize(),
+				success: newsletter.formSuccess,
+				error: newsletter.formError,
+			});
+		};
+
+		newsletter.formSuccess = function(result) {
+			if (result.success != true){
+				newsletter.formError();
+			} else {
+				$(newsletter.options.successMessage).fadeIn();
+			}
+		};
+
+		newsletter.formError = function(result) {
+			$(newsletter.options.errorMessage).fadeIn();
+		};
+
+		newsletter.initialize = function(options) {
+			for (var attributeName in options) {
+				newsletter.options[attributeName] = options[attributeName];
+			}
+
+			if (newsletter.options.formSelector !== undefined) {
+				$(newsletter.options.formSelector).on('submit', newsletter.handleFormSubmit);
+			}
+		};
+
+		return newsletter;	
+	}());
+
+	module.exports = Newsletter;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Utils = __webpack_require__(3);
+
+	var Reservations = (function() {
+		var reservations = {};
+		
+		options = {
+			selector: "a.reserve",
+		};
+
+		reservations.handleOpentable = function(event) {
+			var reserveUrl = 'http://www.opentable.com/single.aspx?rid=' + options.opentable_id + '&restref=' + options.opentable_id;
+
+			if (Utils.isMobile()) {
+				window.location.href = reserveUrl;
+			} else {
+				var modal = $($('#opentable-modal-template').html());
+				modal.show();
+				modal.find('iframe').attr('src', reserveUrl);
+
+				$('body').append(modal);
+				$.featherlight(modal, {
+					afterClose: function() {
+						modal.hide();
+					}
+				});
+			}
+		};
+
+		reservations.handleReservation = function(event) {
+			event.preventDefault();
+
+			switch(options.provider) {
+				case 'opentable':
+					reservations.handleOpentable();
+				default: 
+					return;
+			}
+		};
+
+		reservations.initialize = function(userOptions) {
+			for (var attributeName in userOptions) {
+				options[attributeName] = userOptions[attributeName];
+			}
+			$(options.selector).on('click', reservations.handleReservation);
+		};
+
+		return reservations;	
+	}());
+
+	module.exports = Reservations;
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	var Utils = (function() {
+		var utils = {};
+		
+		utils.isMobile = function() {
+			return (window.matchMedia("(max-width: 800px)").matches);
+		}
+
+		return utils;
+	}());
+
+	module.exports = Utils;
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Utils = __webpack_require__(3);
+
+	var Forms = (function() {
+		var forms = {};
+		
+		options = {
+			formSelector: "form",
+			success: "div.success",
+			error: "div.error",
+			successCallback: forms.successCallback,
+			errorCallback: forms.errorCallback,
+		};
+
+		forms.handleSubmit = function(event) {
+			event.preventDefault();
+
+			var targetForm = $(this);
+
+			var dataString = targetForm.serialize();
+
+			forms.currentForm = targetForm;
+			forms.hideMessages();
+
+			$.ajax({
+				type: "POST",
+				url: targetForm.attr('action'),
+				data: dataString,
+				success: forms.formSubmitSuccess,
+				error: forms.formSubmitError
+			});
+		};
+
+		forms.successCallback = function () {
+			return;
+		},
+
+		forms.errorCallback = function () {
+			return;
+		},
+
+		forms.hideMessages = function() {
+			$(options.success).hide();
+			$(options.error).hide();
+		};
+
+		forms.formSubmitSuccess = function(data) {
+			if (data.success == true || data.success == "true") {
+				$(options.success).fadeIn();
+				options.successCallback();
+				forms.currentForm.trigger('reset');
+			} else {
+				forms.currentForm.find(options.error).fadeIn();
+				options.errorCallback();
+			}
+		};
+
+		forms.formSubmitError = function() {
+			$(options.error).fadeIn();
+		};
+
+		forms.initialize = function(userOptions) {
+			for (var attributeName in userOptions) {
+				options[attributeName] = userOptions[attributeName];
+			}
+
+			$(options.formSelector).on('submit', forms.handleSubmit);
+		};
+
+		return forms;	
+	}());
+
+	module.exports = Forms;
+
+/***/ }
+/******/ ]);
