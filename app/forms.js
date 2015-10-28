@@ -6,7 +6,9 @@ var Forms = (function() {
 	options = {
 		formSelector: "form",
 		success: "div.success",
-		error: "div.error"
+		error: "div.error",
+		successCallback: forms.successCallback,
+		errorCallback: forms.errorCallback,
 	};
 
 	forms.handleSubmit = function(event) {
@@ -28,14 +30,22 @@ var Forms = (function() {
 		});
 	};
 
+	forms.successCallback = function () {
+		return;
+	},
+
+	forms.errorCallback = function () {
+		return;
+	},
+
 	forms.hideMessages = function() {
-		forms.currentForm.find(options.success).hide();
-		forms.currentForm.find(options.error).hide();
+		$(options.success).hide();
+		$(options.error).hide();
 	};
 
 	forms.formSubmitSuccess = function(data) {
 		if (data.success == true || data.success == "true") {
-			forms.currentForm.find(options.success).fadeIn();
+			$(options.success).fadeIn();
 			forms.currentForm.trigger('reset');
 		} else {
 			forms.currentForm.find(options.error).fadeIn();
@@ -43,7 +53,7 @@ var Forms = (function() {
 	};
 
 	forms.formSubmitError = function() {
-		forms.currentForm.find(options.error).fadeIn();
+		$(options.error).fadeIn();
 	};
 
 	forms.initialize = function(userOptions) {
