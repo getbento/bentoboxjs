@@ -46,9 +46,11 @@ var Forms = (function() {
 	forms.formSubmitSuccess = function(data) {
 		if (data.success == true || data.success == "true") {
 			$(options.success).fadeIn();
+			options.successCallback();
 			forms.currentForm.trigger('reset');
 		} else {
 			forms.currentForm.find(options.error).fadeIn();
+			options.errorCallback();
 		}
 	};
 
