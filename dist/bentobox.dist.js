@@ -360,7 +360,7 @@
 	    gc.formSubmitError = function(data) {
 	        var responseData = data.responseJSON;
 
-	        if (responseData.form && responseData.form.errors) {
+	        if (responseData && responseData.form && responseData.form.errors) {
 	            $.each(responseData.form.errors, function(key, value) {
 
 	                var nameAttr = key;
