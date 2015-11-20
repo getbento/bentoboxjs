@@ -326,7 +326,7 @@
 	            type: "POST",
 	            url: form.attr('action'),
 	            data: dataString,
-	            success: options.successCallback,
+	            success: successCallback,
 	            error: gc.formSubmitError
 	        });
 
