@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Newsletter = __webpack_require__(1);
+	var Newsletter = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./newsletter.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	var Reservations = __webpack_require__(2);
 	var Utils = __webpack_require__(3);
 	var Forms = __webpack_require__(4);
@@ -63,61 +63,7 @@
 	module.exports = Bento;
 
 /***/ },
-/* 1 */
-/***/ function(module, exports) {
-
-	var Newsletter = (function() {
-		var newsletter = {};
-
-		newsletter.options = {
-			formSelector: 'form#email_newsletter',
-			successMessage: 'div#success',
-			errorMessage: 'div#error',
-		};
-
-		newsletter.handleFormSubmit = function(event) {
-			event.preventDefault();
-
-			$(newsletter.options.errorMessage).hide();
-
-			var form = $(this);
-			$.ajax({
-				type: 'POST',
-				url: form.attr('action'),
-				data: form.serialize(),
-				success: newsletter.formSuccess,
-				error: newsletter.formError,
-			});
-		};
-
-		newsletter.formSuccess = function(result) {
-			if (result.success != true){
-				newsletter.formError();
-			} else {
-				$(newsletter.options.successMessage).fadeIn();
-			}
-		};
-
-		newsletter.formError = function(result) {
-			$(newsletter.options.errorMessage).fadeIn();
-		};
-
-		newsletter.initialize = function(options) {
-			for (var attributeName in options) {
-				newsletter.options[attributeName] = options[attributeName];
-			}
-
-			if (newsletter.options.formSelector !== undefined) {
-				$(newsletter.options.formSelector).on('submit', newsletter.handleFormSubmit);
-			}
-		};
-
-		return newsletter;	
-	}());
-
-	module.exports = Newsletter;
-
-/***/ },
+/* 1 */,
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -125,8 +71,8 @@
 
 	var Reservations = (function() {
 		var reservations = {};
-		
-		options = {
+
+		var options = {
 			selector: "a.reserve",
 		};
 
@@ -155,7 +101,7 @@
 			switch(options.provider) {
 				case 'opentable':
 					reservations.handleOpentable();
-				default: 
+				default:
 					return;
 			}
 		};
@@ -167,10 +113,11 @@
 			$(options.selector).on('click', reservations.handleReservation);
 		};
 
-		return reservations;	
+		return reservations;
 	}());
 
 	module.exports = Reservations;
+
 
 /***/ },
 /* 3 */
@@ -196,13 +143,14 @@
 
 	var Forms = (function() {
 		var forms = {};
-		
-		options = {
+
+		var options = {
 			formSelector: "form",
 			success: "div.success",
 			error: "div.error",
 			successCallback: forms.successCallback,
 			errorCallback: forms.errorCallback,
+			preSubmit: forms.preSubmit,
 		};
 
 		forms.handleSubmit = function(event) {
@@ -260,10 +208,15 @@
 			$(options.formSelector).on('submit', forms.handleSubmit);
 		};
 
-		return forms;	
+		forms.preSubmit = function() {
+			return;
+		};
+
+		return forms;
 	}());
 
 	module.exports = Forms;
+
 
 /***/ },
 /* 5 */
@@ -272,7 +225,7 @@
 	var GiftCards = (function() {
 	    var gc = {};
 
-	    options = {
+	    var options = {
 	        buttonsSelector: '.show-giftcard-form',
 	        showFormDataAttribute: 'target',
 	        formContainerSelector: '.formContainer',

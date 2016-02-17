@@ -1,7 +1,7 @@
 var Newsletter = (function() {
 	var newsletter = {};
 
-	var newsletter.options = {
+	newsletter.options = {
 		formSelector: 'form#email_newsletter',
 		successMessage: 'div#success',
 		errorMessage: 'div#error',
