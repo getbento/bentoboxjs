@@ -49,8 +49,6 @@ var GiftCards = (function() {
             return false;
         }
 
-        console.log(options.successCallback);
-
         $.ajax({
             type: "POST",
             url: form.attr('action'),

@@ -13,6 +13,10 @@ var Forms = (function() {
 		forms.currentForm = targetForm;
 		forms.hideMessages();
 
+		if (!forms.validateForm(targetForm)) {
+            return false;
+        }
+
 		$.ajax({
 			type: "POST",
 			url: targetForm.attr('action'),
@@ -60,6 +64,20 @@ var Forms = (function() {
 
 	forms.preSubmit = function() {
 		return;
+	};
+
+	forms.validateForm = function() {
+        var hasErrors = false;
+        var inputs = $(options.formSelector).find('input, select');
+
+        _.each(inputs, function(input) {
+            if (!input.checkValidity()) {
+                $(input).addClass('error');
+                hasErrors = true;
+            }
+        }, this);
+
+        return !hasErrors;
 	};
 
 	var options = {
