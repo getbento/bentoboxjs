@@ -3,15 +3,6 @@ var Utils = require('./utils.js');
 var Forms = (function() {
 	var forms = {};
 
-	var options = {
-		formSelector: "form",
-		success: "div.success",
-		error: "div.error",
-		successCallback: forms.successCallback,
-		errorCallback: forms.errorCallback,
-		preSubmit: forms.preSubmit,
-	};
-
 	forms.handleSubmit = function(event) {
 		event.preventDefault();
 
@@ -69,6 +60,15 @@ var Forms = (function() {
 
 	forms.preSubmit = function() {
 		return;
+	};
+
+	var options = {
+		formSelector: "form",
+		success: "div.success",
+		error: "div.error",
+		successCallback: forms.successCallback,
+		errorCallback: forms.errorCallback,
+		preSubmit: forms.preSubmit,
 	};
 
 	return forms;

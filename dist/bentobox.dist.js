@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Newsletter = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./newsletter.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var Newsletter = __webpack_require__(1);
 	var Reservations = __webpack_require__(2);
 	var Utils = __webpack_require__(3);
 	var Forms = __webpack_require__(4);
@@ -63,7 +63,62 @@
 	module.exports = Bento;
 
 /***/ },
-/* 1 */,
+/* 1 */
+/***/ function(module, exports) {
+
+	var Newsletter = (function() {
+		var newsletter = {};
+
+		newsletter.options = {
+			formSelector: 'form#email_newsletter',
+			successMessage: 'div#success',
+			errorMessage: 'div#error',
+		};
+
+		newsletter.handleFormSubmit = function(event) {
+			event.preventDefault();
+
+			$(newsletter.options.errorMessage).hide();
+
+			var form = $(this);
+			$.ajax({
+				type: 'POST',
+				url: form.attr('action'),
+				data: form.serialize(),
+				success: newsletter.formSuccess,
+				error: newsletter.formError,
+			});
+		};
+
+		newsletter.formSuccess = function(result) {
+			if (result.success != true){
+				newsletter.formError();
+			} else {
+				$(newsletter.options.successMessage).fadeIn();
+			}
+		};
+
+		newsletter.formError = function(result) {
+			$(newsletter.options.errorMessage).fadeIn();
+		};
+
+		newsletter.initialize = function(options) {
+			for (var attributeName in options) {
+				newsletter.options[attributeName] = options[attributeName];
+			}
+
+			if (newsletter.options.formSelector !== undefined) {
+				$(newsletter.options.formSelector).on('submit', newsletter.handleFormSubmit);
+			}
+		};
+
+		return newsletter;
+	}());
+
+	module.exports = Newsletter;
+
+
+/***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
