@@ -2,8 +2,8 @@ var Utils = require('./utils.js');
 
 var Reservations = (function() {
 	var reservations = {};
-	
-	options = {
+
+	var options = {
 		selector: "a.reserve",
 	};
 
@@ -32,7 +32,7 @@ var Reservations = (function() {
 		switch(options.provider) {
 			case 'opentable':
 				reservations.handleOpentable();
-			default: 
+			default:
 				return;
 		}
 	};
@@ -44,7 +44,7 @@ var Reservations = (function() {
 		$(options.selector).on('click', reservations.handleReservation);
 	};
 
-	return reservations;	
+	return reservations;
 }());
 
 module.exports = Reservations;

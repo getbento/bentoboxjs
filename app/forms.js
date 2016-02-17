@@ -2,13 +2,14 @@ var Utils = require('./utils.js');
 
 var Forms = (function() {
 	var forms = {};
-	
-	options = {
+
+	var options = {
 		formSelector: "form",
 		success: "div.success",
 		error: "div.error",
 		successCallback: forms.successCallback,
 		errorCallback: forms.errorCallback,
+		preSubmit: forms.preSubmit,
 	};
 
 	forms.handleSubmit = function(event) {
@@ -66,7 +67,11 @@ var Forms = (function() {
 		$(options.formSelector).on('submit', forms.handleSubmit);
 	};
 
-	return forms;	
+	forms.preSubmit = function() {
+		return;
+	};
+
+	return forms;
 }());
 
 module.exports = Forms;

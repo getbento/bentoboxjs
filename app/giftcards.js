@@ -1,7 +1,7 @@
 var GiftCards = (function() {
     var gc = {};
 
-    options = {
+    var options = {
         buttonsSelector: '.show-giftcard-form',
         showFormDataAttribute: 'target',
         formContainerSelector: '.formContainer',

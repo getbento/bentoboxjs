@@ -1,7 +1,7 @@
 var Newsletter = (function() {
 	var newsletter = {};
 
-	newsletter.options = {
+	var newsletter.options = {
 		formSelector: 'form#email_newsletter',
 		successMessage: 'div#success',
 		errorMessage: 'div#error',
@@ -44,7 +44,7 @@ var Newsletter = (function() {
 		}
 	};
 
-	return newsletter;	
+	return newsletter;
 }());
 
 module.exports = Newsletter;
