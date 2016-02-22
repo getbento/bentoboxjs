@@ -180,7 +180,7 @@
 
 	var Utils = (function() {
 		var utils = {};
-		
+
 		utils.isMobile = function() {
 			return (window.matchMedia("(max-width: 800px)").matches);
 		}
@@ -201,6 +201,8 @@
 
 		forms.handleSubmit = function(event) {
 			event.preventDefault();
+
+			options.preSubmit();
 
 			var targetForm = $(this);
 
