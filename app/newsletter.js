@@ -2,7 +2,7 @@ var Newsletter = (function() {
 	var newsletter = {};
 
 	newsletter.options = {
-		formSelector: 'form#email_newsletter',
+		formSelector: 'form#newsletter',
 		successMessage: 'div#success',
 		errorMessage: 'div#error',
 	};
