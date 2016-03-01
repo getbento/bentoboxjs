@@ -180,7 +180,7 @@
 
 	var Utils = (function() {
 		var utils = {};
-
+		
 		utils.isMobile = function() {
 			return (window.matchMedia("(max-width: 800px)").matches);
 		}
@@ -262,23 +262,19 @@
 			return;
 		};
 
-	forms.validateForm = function(targetForm) {
-            var hasErrors = false;
-            var inputs = $(options.formSelector).find('input, select');
+		forms.validateForm = function() {
+	        var hasErrors = false;
+	        var inputs = $(options.formSelector).find('input, select');
 
-            if (targetForm) {
-                inputs = targetForm.find('input, select');
-            }
+	        _.each(inputs, function(input) {
+	            if (!input.checkValidity()) {
+	                $(input).addClass('error');
+	                hasErrors = true;
+	            }
+	        }, this);
 
-            _.each(inputs, function(input) {
-                if (!input.checkValidity()) {
-                    $(input).addClass('error');
-                    hasErrors = true;
-                }
-            }, this);
-
-            return !hasErrors;
-        };
+	        return !hasErrors;
+		};
 
 		var options = {
 			formSelector: "form",
