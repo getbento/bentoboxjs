@@ -202,6 +202,8 @@
 		forms.handleSubmit = function(event) {
 			event.preventDefault();
 
+			options.preSubmit();
+
 			var targetForm = $(this);
 
 			var dataString = targetForm.serialize();
