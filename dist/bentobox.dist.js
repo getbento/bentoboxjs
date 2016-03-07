@@ -328,7 +328,7 @@
 	    		email_field.parents('.form-group').hide();
 	    		send_after.parents('.form-group').hide();
 	    	} else {
-	            email_field.addAttr('required');
+	            email_field.attr('required');
 	    		email_field.parents('.form-group').show();
 	    		send_after.parents('.form-group').show();
 	    	}
