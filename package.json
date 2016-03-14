@@ -1,6 +1,7 @@
 {
   "name": "bentoboxjs",
-  "dependencies": [
-    "webpack"
-  ]
+  "dependencies": {
+    "webpack": "1.12.14",
+    "underscore": "1.8.3"
+  }
 }
