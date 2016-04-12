@@ -68,9 +68,9 @@ var Forms = (function() {
 		return;
 	};
 
-	forms.validateForm = function() {
+	forms.validateForm = function(targetForm) {
         var hasErrors = false;
-        var inputs = $(options.formSelector).find('input, select');
+        var inputs = targetForm.find('input, select');
 
         _.each(inputs, function(input) {
             if (!input.checkValidity()) {
