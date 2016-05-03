@@ -113,7 +113,7 @@ var GiftCards = (function() {
     	$(options.formContainerSelector).on('change', 'input[name="email_gifter"]', gc.showHideRecipientFields);
 
         if (options.handleFormSubmit) {
-            $(options.formContainerSelector).on("click", "button", gc.handleFormSubmit);
+            $(options.formContainerSelector).on("click", options.submitSelector, gc.handleFormSubmit);
         }
     };
 
