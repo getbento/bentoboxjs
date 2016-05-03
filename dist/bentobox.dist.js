@@ -44,7 +44,6 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// var _ = require('underscore');
 	var Newsletter = __webpack_require__(1);
 	var Reservations = __webpack_require__(2);
 	var Utils = __webpack_require__(3);
@@ -266,9 +265,9 @@
 			return;
 		};
 
-		forms.validateForm = function() {
+		forms.validateForm = function(targetForm) {
 	        var hasErrors = false;
-	        var inputs = $(options.formSelector).find('input, select');
+	        var inputs = targetForm.find('input, select');
 
 	        _.each(inputs, function(input) {
 	            if (!input.checkValidity()) {
@@ -1969,7 +1968,7 @@
 	    	$(options.formContainerSelector).on('change', 'input[name="email_gifter"]', gc.showHideRecipientFields);
 
 	        if (options.handleFormSubmit) {
-	            $(options.formContainerSelector).on("click", "button", gc.handleFormSubmit);
+	            $(options.formContainerSelector).on("click", options.submitSelector, gc.handleFormSubmit);
 	        }
 	    };
 
