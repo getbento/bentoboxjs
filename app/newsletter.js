@@ -5,6 +5,7 @@ var Newsletter = (function() {
 		formSelector: 'form#newsletter',
 		successMessage: 'div#success',
 		errorMessage: 'div#error',
+		successCallback: newsletter.successCallback,
 	};
 
 	newsletter.handleFormSubmit = function(event) {
@@ -22,11 +23,16 @@ var Newsletter = (function() {
 		});
 	};
 
+	newsletter.successCallback = function () {
+		return;
+	},
+
 	newsletter.formSuccess = function(result) {
 		if (result.success != true){
 			newsletter.formError();
 		} else {
 			$(newsletter.options.successMessage).fadeIn();
+			newsletter.options.successCallback();
 		}
 	};
 
