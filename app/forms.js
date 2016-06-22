@@ -19,13 +19,23 @@ var Forms = (function() {
             return false;
         }
 
-		$.ajax({
+		var ajaxOptions = {
 			type: "POST",
 			url: targetForm.attr('action'),
 			data: dataString,
 			success: forms.formSubmitSuccess,
 			error: forms.formSubmitError
-		});
+		};
+
+		var fileInputSelector = options.fileInputSelector;
+
+		if (targetForm.find(fileInputSelector).val()) {
+			ajaxOptions.data = new FormData(targetForm[0]);
+			ajaxOptions.contentType = false;
+			ajaxOptions.processData = false;
+		}
+
+		$.ajax(ajaxOptions);
 	};
 
 	forms.successCallback = function () {
@@ -89,6 +99,7 @@ var Forms = (function() {
 		successCallback: forms.successCallback,
 		errorCallback: forms.errorCallback,
 		preSubmit: forms.preSubmit,
+		fileInputSelector: "#uploaded_file",
 	};
 
 	return forms;
