@@ -80,12 +80,14 @@ var Forms = (function() {
 
 	forms.validateForm = function(targetForm) {
         var hasErrors = false;
-        var inputs = targetForm.find('input, select');
+        var inputs = targetForm.find('input, select, textarea');
 
         _.each(inputs, function(input) {
             if (!input.checkValidity()) {
                 $(input).addClass('error');
                 hasErrors = true;
+            } else {
+        	 	$(input).removeClass('error');
             }
         }, this);
 
