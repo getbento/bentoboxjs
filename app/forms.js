@@ -56,6 +56,7 @@ var Forms = (function() {
 			$(options.success).fadeIn();
 			options.successCallback();
 			forms.currentForm.trigger('reset');
+			forms.currentForm.find('input, select, textarea').removeClass('error');
 		} else {
 			forms.currentForm.find(options.error).fadeIn();
 			options.errorCallback();
