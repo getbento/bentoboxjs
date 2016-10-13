@@ -25,3 +25,13 @@ $(document).ready(function() {
 });
 </script>
 ```
+
+```
+<script type="text/javascript">
+$(document).ready(function() {
+  Bento.Forms.initialize({
+    formSelector: '.newsletter-form',
+  });
+});
+</script>
+```
